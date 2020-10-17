@@ -29,17 +29,17 @@ services:
     networks:
       - mq-network
 
-  # obse:
-  #   depends_on:
-  #     - "rabbitmq"
-  #   command: ["node", "app.js"]
-  #   build:
-  #     dockerfile: Dockerfile
-  #     context: ./observer
-  #   networks:
-  #     - mq-network
-  #   volumes:
-  #     - ./message-store:/var/lib/messages
+  obse:
+    depends_on:
+      - "rabbitmq"
+    command: ["/observer/utils/wait-for-it.sh", "rabbitmq:5672", "-t", "30", "-s", "--", "node", "app.js"]
+    build:
+      dockerfile: Dockerfile
+      context: ./observer
+    networks:
+      - mq-network
+    volumes:
+      - ./message-store:/var/lib/messages
 
   # httpserv:
   #   command: ["node", "app.js"]
