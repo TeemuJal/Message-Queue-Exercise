@@ -41,15 +41,17 @@ services:
     volumes:
       - ./message-store:/var/lib/messages
 
-  # httpserv:
-  #   command: ["node", "app.js"]
-  #   build:
-  #     dockerfile: Dockerfile
-  #     context: ./http-service
-  #   ports:
-  #     - "8080:8080"
-  #   networks:
-  #     - mq-network
+  httpserv:
+    command: ["node", "app.js"]
+    build:
+      dockerfile: Dockerfile
+      context: ./http-service
+    ports:
+      - "8080:8080"
+    networks:
+      - mq-network
+    volumes:
+        - ./message-store:/var/lib/messages
 
 networks:
   mq-network:
