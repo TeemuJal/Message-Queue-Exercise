@@ -23,6 +23,5 @@ module.exports.receiveMessages = function(rabbitHost, exchangeName, topic, callb
         });
       });
     });
-  })
-  // .catch(console.warn);
+  });
 };
